@@ -1,0 +1,5 @@
+sanic-aiomysql
+sanic
+miko-tpl
+orjson
+sanic-ext
