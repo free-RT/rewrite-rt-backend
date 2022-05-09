@@ -1,4 +1,4 @@
-from orjson import load
+from orjson import loads
 from typing import TypedDict, Dict
 
 
@@ -7,4 +7,4 @@ class SecretType(TypedDict):
     sanic: dict
     
 with open("secret.json") as f:
-    Secret: SecretType = load(f)
+    Secret: SecretType = loads(f.read())
