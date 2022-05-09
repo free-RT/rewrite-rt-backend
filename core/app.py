@@ -15,7 +15,7 @@ def setup_app(app: TypedSanic):
     app.ctx.miko = Manager()
     
     async def _template(path: str, **kwargs):
-        return response.html(await app.ctx.miko.aiorender("{}/{}".format(PATH, path)))
+        return response.html(await app.ctx.miko.aiorender("{}{}".format(PATH, path)))
     app.ctx.template = _template
     
     @app.on_request
@@ -23,6 +23,6 @@ def setup_app(app: TypedSanic):
         if (request.server_name == "localhost"
             or request.server_name == "free-rt.com"):
             if exists(f"{PATH}{request.path}"):
-                return await app.ctx.template(f"{PATH}{request.path}")
+                return await app.ctx.template(request.path)
             else:
                 raise SanicException("あれ？ここどこだ？真っ白な壁がずっと続いているよ", status_code=404)
