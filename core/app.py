@@ -12,7 +12,7 @@ class TypedSanic(Sanic):
     pass
 
 
-def l(tag="div", extends="", class_="", **kwargs) -> str:
+def l(tag: str="div", extends: str="", class_: str="", **kwargs) -> str:
     "複数言語対応用"
     return "".join(
         f'<{tag} class="language {key} {class_}" {extends} hidden>{value}</{tag}>'
@@ -23,7 +23,7 @@ def cl(text: Union[str, dict[str, str]]) -> str:
     "渡されたやつが辞書ならlに渡す。"
     return l(**text) if isinstance(text, dict) else text
 
-def layout(title, description, content, head=""):
+def layout(title: str, description: str, content: str, head: str=""):
     "一般のHTMLをレンダリングする関数です。"
     title = cl(title)
     description = cl(description)
