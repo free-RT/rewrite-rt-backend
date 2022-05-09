@@ -2,6 +2,7 @@ from sanic import Sanic, response, Request
 from sanic.exceptions import SanicException
 from sanic_mysql import ExtendMySQL
 from orjson import dumps, loads
+from typing import Union
 from data import Secret
 from miko.manager import Manager
 from os.path import exists
