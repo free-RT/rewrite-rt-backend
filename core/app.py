@@ -28,7 +28,7 @@ def layout(title, description, content, head=""):
     title = cl(title)
     description = cl(description)
     content = cl(content)
-    return app.ctx.env.render(
+    return gapp.ctx.env.render(
         f"{template_folder}/layout.html", content=content,
         head=f"""<title>{title}</title>
         <meta name="description" content="{description}">
@@ -37,6 +37,7 @@ def layout(title, description, content, head=""):
 
 
 def setup_app(app: TypedSanic):
+    global gapp
     app.ctx.mysql = ExtendMySQL(app, **Secret["mysql"])
     app.ctx.miko = Manager(
         extends={
@@ -47,7 +48,7 @@ def setup_app(app: TypedSanic):
             "l": l
         }
     )
-    
+    gapp = app
     async def _template(path: str, **kwargs):
         kwargs["app"] = app
         return response.html(await app.ctx.miko.aiorender("{}{}".format(PATH, path), **kwargs))
