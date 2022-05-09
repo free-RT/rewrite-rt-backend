@@ -54,7 +54,7 @@ def setup_app(app: TypedSanic):
         kwargs["app"] = app
         return response.html(await app.ctx.miko.aiorender("{}{}".format(PATH, path), **kwargs))
     app.ctx.template = app.ctx.render = _template
-    app.ctx.canary = True if argv[1] else False
+    app.ctx.canary = argv[1] == "canary"
     
     @app.on_request
     async def response_content(request: Request):
