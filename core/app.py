@@ -6,6 +6,7 @@ from typing import Union
 from data import Secret
 from miko.manager import Manager
 from os.path import exists
+from sys import argv
 
 PATH = template_folder = "rt-frontend"
 class TypedSanic(Sanic):
@@ -53,6 +54,7 @@ def setup_app(app: TypedSanic):
         kwargs["app"] = app
         return response.html(await app.ctx.miko.aiorender("{}{}".format(PATH, path), **kwargs))
     app.ctx.template = app.ctx.render = _template
+    app.ctx.canary = True if argv[1] else False
     
     @app.on_request
     async def response_content(request: Request):
