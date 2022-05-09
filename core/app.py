@@ -58,6 +58,8 @@ def setup_app(app: TypedSanic):
     async def response_content(request: Request):
         if (request.server_name == "localhost"
             or request.server_name == "free-rt.com"):
+            if request.path == "/":
+                return await app.ctx.template("/index.html", eloop=app.loop, _=l)
             if exists(f"{PATH}{request.path}"):
                 if request.path.endswith(".html"):
                     return await app.ctx.template(request.path, eloop=app.loop, _=l)
