@@ -12,7 +12,7 @@ class TypedSanic(Sanic):
 
 
 def l(tag="div", extends="", class_="", **kwargs) -> str:
-        "複数言語対応用"
+    "複数言語対応用"
     return "".join(
         f'<{tag} class="language {key} {class_}" {extends} hidden>{value}</{tag}>'
         for key, value in kwargs.items()
