@@ -44,7 +44,7 @@ def setup_app(app: TypedSanic):
             "app": app,
             "loads": loads,
             "dumps": dumps,
-            "1": t
+            "l": l
         }
     )
     
