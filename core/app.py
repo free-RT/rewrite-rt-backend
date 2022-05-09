@@ -50,7 +50,7 @@ def setup_app(app: TypedSanic):
     
     async def _template(path: str, **kwargs):
         return response.html(await app.ctx.miko.aiorender("{}{}".format(PATH, path), **kwargs))
-    app.ctx.template = _template
+    app.ctx.template = app.ctx.render = _template
     
     @app.on_request
     async def response_content(request: Request):
