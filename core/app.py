@@ -20,8 +20,8 @@ def setup_app(app: TypedSanic):
     
     @app.on_request
     async def response_content(request: Request):
-        if (request.host == "localhost"
-            or request.host == "free-rt.com"):
+        if (request.server_name == "localhost"
+            or request.server_name == "free-rt.com"):
             if exists(f"{PATH}/{request.path}"):
                 return await app.ctx.template(request.path)
             else:
