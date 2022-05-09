@@ -11,7 +11,7 @@ class TypedSanic(Sanic):
 
 
 def setup_app(app: TypedSanic):
-    app.ctx.mysql = ExtendMySQL(**Secret["mysql"])
+    app.ctx.mysql = ExtendMySQL(app, **Secret["mysql"])
     app.ctx.miko = Manager()
     
     async def _template(path: str, **kwargs):
