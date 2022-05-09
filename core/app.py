@@ -8,4 +8,4 @@ class TypedSanic(Sanic):
 
 
 def setup_app(app: TypedSanic):
-    app.ctx.mysql = ExtendMySQL()
+    app.ctx.mysql = ExtendMySQL(**Secret["mysql"])
