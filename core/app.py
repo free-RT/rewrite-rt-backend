@@ -7,7 +7,7 @@ from data import Secret
 from miko.manager import Manager
 from os.path import exists
 
-PATH = "rt-frontend"
+PATH = template_folder = "rt-frontend"
 class TypedSanic(Sanic):
     pass
 
