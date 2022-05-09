@@ -39,7 +39,7 @@ def layout(title, description, content, head=""):
 def setup_app(app: TypedSanic):
     global gapp
     app.ctx.mysql = ExtendMySQL(app, **Secret["mysql"])
-    app.ctx.miko = Manager(
+    app.ctx.env = app.ctx.miko = Manager(
         extends={
             "layout": layout,
             "app": app,
