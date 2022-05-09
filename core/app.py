@@ -22,7 +22,7 @@ def setup_app(app: TypedSanic):
     async def response_content(request: Request):
         if (request.server_name == "localhost"
             or request.server_name == "free-rt.com"):
-            if exists(f"{PATH}/{request.path}"):
-                return await app.ctx.template(request.path)
+            if exists(f"{PATH}{request.path}"):
+                return await app.ctx.template(f"{PATH}{request.path}")
             else:
                 raise SanicException("あれ？ここどこだ？真っ白な壁がずっと続いているよ", status_code=404)
