@@ -74,3 +74,8 @@ def setup_app(app: TypedSanic):
                     return await response.file(f"{PATH}{request.path}")
             else:
                 raise SanicException("あれ？ここどこだ？真っ白な壁がずっと続いているよ", status_code=404)
+
+    @app.exception(Exception)
+    async def on_error(request: Request, exception: Exception):
+        if request.status == 404:
+            return response.json({}, message="ここには何もないよ", status=404)
