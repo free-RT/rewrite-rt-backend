@@ -4,6 +4,7 @@ from sanic import response
 from data import Secret
 
 from os import listdir
+from import_lib import import_module
 
 
 app = TypedSanic("app")
@@ -15,7 +16,11 @@ async def api(request):
 
 
 for name in os.listdir("blueprints"):
-    pass
+    lib = import_module("blueprints.{}".format(name.replace(".py", "")))
+    if hasattr(lib, "bp"):
+        app.blueprint(lib.bp)
+    elif hasattr(lib, "setup"):
+        lib.setup(app)
 
 
 setup_app(app)
